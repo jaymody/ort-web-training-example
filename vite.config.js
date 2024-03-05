@@ -9,7 +9,7 @@ export default {
                     dest: "",
                 },
                 {
-                    src: "models/mlp/*",
+                    src: "models/*",
                     dest: "",
                 },
             ],
