@@ -25,7 +25,7 @@ def main(out_dir="models/"):
     os.makedirs(out_dir, exist_ok=True)
 
     # model stuff
-    pt_model = Model("pytorch/vision:v0.10.0", "resnet18")
+    pt_model = Model("NVIDIA/DeepLearningExamples:torchhub", "nvidia_efficientnet_b0")
     example_input = (torch.randn(1, 3, 224, 224),)
     input_names = ["input"]
     output_names = ["output"]
