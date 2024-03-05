@@ -4,13 +4,28 @@ import os
 import onnx
 import torch
 from onnxruntime.training import artifacts
+from torchvision import transforms
+
+
+class Model(torch.nn.Module):
+    def __init__(self, model_repo, model_name):
+        super().__init__()
+        self.normalize = transforms.Normalize(
+            mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+        )
+        self.network = torch.hub.load(model_repo, model_name, pretrained=True)
+
+    def forward(self, x):
+        x = self.normalize(x)
+        x = self.network(x)
+        return x
 
 
 def main(out_dir="models/"):
     os.makedirs(out_dir, exist_ok=True)
 
     # model stuff
-    pt_model = torch.hub.load("pytorch/vision:v0.10.0", "resnet18", pretrained=True)
+    pt_model = Model("pytorch/vision:v0.10.0", "resnet18")
     example_input = (torch.randn(1, 3, 224, 224),)
     input_names = ["input"]
     output_names = ["output"]
