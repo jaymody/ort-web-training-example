@@ -9,10 +9,10 @@ function imgToImageData(img) {
 
 async function main() {
     const session = await ort.TrainingSession.create({
-        checkpointState: "models/mlp/checkpoint",
-        trainModel: "models/mlp/training_model.onnx",
-        evalModel: "models/mlp/eval_model.onnx",
-        optimizerModel: "models/mlp/optimizer_model.onnx",
+        checkpointState: "checkpoint",
+        trainModel: "training_model.onnx",
+        evalModel: "eval_model.onnx",
+        optimizerModel: "optimizer_model.onnx",
     });
 
     const input = document.getElementById("input");

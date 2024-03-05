@@ -8,6 +8,10 @@ export default {
                     src: "node_modules/onnxruntime-web/dist/*.wasm",
                     dest: "",
                 },
+                {
+                    src: "models/mlp/*",
+                    dest: "",
+                },
             ],
         }),
     ],
