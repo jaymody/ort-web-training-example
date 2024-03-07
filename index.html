@@ -2,13 +2,30 @@
 <html lang="en">
     <head>
         <title>Demo</title>
-
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <link rel="stylesheet" href="style.css" />
-        <script defer type="module" src="index.js"></script>
     </head>
 
-    <body></body>
+    <body>
+        <p id="info"></p>
+
+        <script type="module">
+            import * as ort from "onnxruntime-web/training";
+
+            const info = document.getElementById("info");
+
+            info.innerText = "awaiting ort.TrainingSession.create() ...";
+
+            try {
+                const session = await ort.TrainingSession.create({
+                    checkpointState: "checkpoint",
+                    trainModel: "training_model.onnx",
+                    evalModel: "eval_model.onnx",
+                    optimizerModel: "optimizer_model.onnx",
+                });
+                info.innerText = "done! ✅";
+            } catch (error) {
+                info.innerText = `uh oh ❌, an error occured, see console`;
+                throw error;
+            }
+        </script>
+    </body>
 </html>
